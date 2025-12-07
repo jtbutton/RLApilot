@@ -1,5 +1,6 @@
 source_id,relationship,target_id
-res_hpge,USED_IN,inst_hpge_well
+inst_hpge_well,USED_IN,res_hpge
+
 res_hpge,TEACHES,c_cdg_levels
 res_hpge,TEACHES,c_137cs_support
 res_hpge,TEACHES,c_60co_pathways
@@ -51,3 +52,4 @@ res_air,TEACHES,c_rfa_nrf
 res_air,TEACHES,c_incident_phases
 
 res_air,OWNED_BY,prog_erln
+res_air,OWNED_BY,prog_icln
