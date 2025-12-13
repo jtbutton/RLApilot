@@ -1,0 +1,558 @@
+{
+  "ontology": {
+    "name": "Radiolab Atlas Ontology",
+    "version": "1.1.1",
+    "description": "LLM-friendly ontology for radiological laboratory preparedness, learning, and operations."
+  },
+  "node_types": {
+    "Resource": {
+      "purpose": "Domain artifacts such as SOPs, methods, guides, tools, training modules, etc.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "title": "string",
+          "resource_type": {
+            "type": "enum",
+            "values": [
+              "SOP",
+              "Method",
+              "Guide",
+              "TrainingModule",
+              "Tool",
+              "Calculator",
+              "Template",
+              "Standard",
+              "Policy",
+              "Checklist",
+              "Report",
+              "Other"
+            ]
+          }
+        },
+        "governance_required": {
+          "summary": "string",
+          "source_program": {
+            "type": "enum",
+            "values": [
+              "ICLN",
+              "ERLN",
+              "FERN",
+              "LRN-C",
+              "NARR",
+              "CDC-RadLab",
+              "Other"
+            ]
+          },
+          "version": "string",
+          "date_published": "datetime",
+          "file_type": {
+            "type": "enum",
+            "values": [
+              "PDF",
+              "DOCX",
+              "XLSX",
+              "PPTX",
+              "HTML",
+              "Video",
+              "Image",
+              "Other"
+            ]
+          }
+        },
+        "optional": {
+          "authors": "list[string]",
+          "learning_objectives": "list[string]",
+          "keywords": "list[string]",
+          "applicability": "list[string]",
+          "url": "string",
+          "confidentiality_level": {
+            "type": "enum",
+            "values": [
+              "public",
+              "internal",
+              "restricted"
+            ]
+          },
+          "ontology_version": "string"
+        }
+      }
+    },
+    "Concept": {
+      "purpose": "Domain ideas and principles relevant to radiological lab preparedness.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "name": "string"
+        },
+        "governance_required": {
+          "definition": "string",
+          "category": {
+            "type": "enum",
+            "values": "see controlled_vocabularies.concept_categories"
+          }
+        },
+        "optional": {
+          "examples": "list[string]",
+          "common_misconceptions": "list[string]",
+          "related_equations": "list[string]",
+          "risk_context": "string",
+          "tags": "list[string]",
+          "ontology_version": "string"
+        }
+      }
+    },
+    "Competency": {
+      "purpose": "Skills or capabilities that can be learned, practiced, and assessed.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "name": "string"
+        },
+        "governance_required": {
+          "description": "string",
+          "competency_category": {
+            "type": "enum",
+            "values": [
+              "Technical",
+              "Operational",
+              "Planning",
+              "Administrative",
+              "Safety",
+              "Interpretation",
+              "Validation"
+            ]
+          }
+        },
+        "governance_recommended": {
+          "level": {
+            "type": "enum",
+            "values": [
+              "Novice",
+              "Intermediate",
+              "Advanced",
+              "Expert"
+            ]
+          }
+        },
+        "optional": {
+          "assessment_methods": "list[string]",
+          "prerequisite_competencies": "list[string]",
+          "estimated_hours_to_proficiency": "float",
+          "ontology_version": "string"
+        }
+      }
+    },
+    "Scenario": {
+      "purpose": "Operational contexts for training, planning, and emergency response.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "name": "string",
+          "scenario_type": {
+            "type": "enum",
+            "values": [
+              "CRC",
+              "Fallout",
+              "Ingestion",
+              "MixedAgentILCE",
+              "FieldScreening",
+              "LabSurge",
+              "SupplyChainDisruption",
+              "CrossNetworkActivation",
+              "Other"
+            ]
+          }
+        },
+        "governance_required": {
+          "description": "string"
+        },
+        "governance_recommended": {
+          "operational_context": "string"
+        },
+        "optional": {
+          "timeline": "list[object]",
+          "injects": "list[string]",
+          "performance_metrics": "list[string]",
+          "key_decision_points": "list[string]",
+          "assumed_resources": "list[string]",
+          "ontology_version": "string"
+        }
+      }
+    },
+    "Role": {
+      "purpose": "User personas / job functions for role-based personalization.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "name": "string"
+        },
+        "governance_required": {
+          "description": "string"
+        },
+        "governance_recommended": {
+          "expected_minimum_experience": {
+            "type": "enum",
+            "values": [
+              "Beginner",
+              "Intermediate",
+              "Advanced"
+            ]
+          }
+        },
+        "optional": {
+          "assigned_competency_ids": "list[string]",
+          "typical_tasks": "list[string]",
+          "common_information_needs": "list[string]",
+          "pain_points": "list[string]",
+          "ontology_version": "string"
+        }
+      }
+    },
+    "NetworkProgram": {
+      "purpose": "Organizational networks or programs (e.g., ICLN, ERLN) providing governance and resources.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "name": "string"
+        },
+        "governance_required": {
+          "description": "string"
+        },
+        "optional": {
+          "program_type": {
+            "type": "enum",
+            "values": [
+              "Network",
+              "FederalProgram",
+              "Pilot",
+              "Initiative",
+              "Other"
+            ]
+          },
+          "activation_protocol_notes": "string",
+          "member_roles": "list[string]",
+          "key_resource_ids": "list[string]",
+          "ontology_version": "string"
+        }
+      }
+    },
+    "CandidateConcept": {
+      "purpose": "Proposed new concepts discovered during ingestion requiring SME review.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "label": "string",
+          "status": {
+            "type": "enum",
+            "values": [
+              "proposed",
+              "approved",
+              "merged",
+              "rejected"
+            ]
+          },
+          "source_resource_id": "string"
+        },
+        "optional": {
+          "proposed_by": "string",
+          "notes": "string",
+          "merged_into_concept_id": "string",
+          "ontology_version": "string"
+        }
+      }
+    },
+    "Instrument": {
+      "purpose": "Physical analytical systems, detectors, counters, and portable instruments.",
+      "fields": {
+        "schema_required": {
+          "id": "string",
+          "name": "string",
+          "instrument_type": {
+            "type": "enum",
+            "values": [
+              "HPGe",
+              "LSC",
+              "ICP-MS",
+              "ProportionalCounter",
+              "GammaCamera",
+              "FieldDetector",
+              "PortableSpec",
+              "Other"
+            ]
+          }
+        },
+        "governance_required": {
+          "manufacturer": "string",
+          "model_number": "string",
+          "detection_principle": "string"
+        },
+        "optional": {
+          "sensitivity": "string",
+          "energy_range": "string",
+          "throughput_notes": "string",
+          "recommended_use_cases": "list[string]",
+          "ontology_version": "string"
+        }
+      }
+    }
+  },
+  "relationship_types": {
+    "TEACHES": {
+      "description": "Resource explains or teaches a concept.",
+      "from": "Resource",
+      "to": "Concept",
+      "direction": "Resource->Concept",
+      "properties": {
+        "optional": {
+          "confidence": "float",
+          "evidence_section": "string"
+        }
+      }
+    },
+    "SUPPORTS": {
+      "description": "Resource supports learning or assessment of a competency.",
+      "from": "Resource",
+      "to": "Competency",
+      "direction": "Resource->Competency",
+      "properties": {
+        "optional": {
+          "support_type": {
+            "type": "enum",
+            "values": [
+              "learn",
+              "practice",
+              "assess"
+            ]
+          },
+          "confidence": "float"
+        }
+      }
+    },
+    "PREREQUISITE_FOR": {
+      "description": "Concept A should be understood before Concept B.",
+      "from": "Concept",
+      "to": "Concept",
+      "direction": "Concept->Concept",
+      "properties": {
+        "optional": {
+          "strength": {
+            "type": "enum",
+            "values": [
+              "weak",
+              "moderate",
+              "strong"
+            ]
+          }
+        }
+      }
+    },
+    "RELATED_TO": {
+      "description": "Lateral association between concepts without prerequisite semantics.",
+      "from": "Concept",
+      "to": "Concept",
+      "direction": "bidirectional",
+      "properties": {
+        "optional": {
+          "relationship_note": "string"
+        }
+      }
+    },
+    "REQUIRED_FOR": {
+      "description": "Mastery of the concept is required for the competency.",
+      "from": "Concept",
+      "to": "Competency",
+      "direction": "Concept->Competency",
+      "properties": {}
+    },
+    "NEEDED_FOR": {
+      "description": "Competency is needed for effective performance of the role.",
+      "from": "Competency",
+      "to": "Role",
+      "direction": "Competency->Role",
+      "properties": {
+        "optional": {
+          "importance": "int"
+        }
+      }
+    },
+    "APPLIES_TO": {
+      "description": "Resource applies to or is relevant in the scenario.",
+      "from": "Resource",
+      "to": "Scenario",
+      "direction": "Resource->Scenario",
+      "properties": {
+        "optional": {
+          "relevance_type": {
+            "type": "enum",
+            "values": [
+              "primary",
+              "secondary",
+              "background"
+            ]
+          }
+        }
+      }
+    },
+    "OWNED_BY": {
+      "description": "Resource is owned or stewarded by a network program.",
+      "from": "Resource",
+      "to": "NetworkProgram",
+      "direction": "Resource->NetworkProgram",
+      "properties": {}
+    },
+    "DEVELOPS": {
+      "description": "Scenario is designed to develop or assess a competency.",
+      "from": "Scenario",
+      "to": "Competency",
+      "direction": "Scenario->Competency",
+      "properties": {}
+    },
+    "ILLUSTRATES": {
+      "description": "Scenario illustrates or exemplifies a concept in context.",
+      "from": "Scenario",
+      "to": "Concept",
+      "direction": "Scenario->Concept",
+      "properties": {}
+    },
+    "CANDIDATE_FOR": {
+      "description": "CandidateConcept is proposed to merge into or align with an existing concept.",
+      "from": "CandidateConcept",
+      "to": "Concept",
+      "direction": "CandidateConcept->Concept",
+      "properties": {}
+    },
+    "USED_IN": {
+      "description": "Instrument is used in a given resource (e.g., method, SOP).",
+      "from": "Instrument",
+      "to": "Resource",
+      "direction": "Instrument->Resource",
+      "properties": {}
+    },
+    "REQUIRES_INSTRUMENT_COMPETENCY": {
+      "description": "Instrument requires specific competencies to operate or maintain.",
+      "from": "Instrument",
+      "to": "Competency",
+      "direction": "Instrument->Competency",
+      "properties": {}
+    },
+    "DEPLOYED_IN": {
+      "description": "Instrument can be deployed in the given scenario.",
+      "from": "Instrument",
+      "to": "Scenario",
+      "direction": "Instrument->Scenario",
+      "properties": {}
+    },
+    "EMBODIES": {
+      "description": "Instrument embodies or operationalizes a concept (e.g., efficiency correction, energy calibration).",
+      "from": "Instrument",
+      "to": "Concept",
+      "direction": "Instrument->Concept",
+      "properties": {}
+    }
+  },
+  "controlled_vocabularies": {
+    "concept_categories": {
+      "foundational_science_and_measurement": [
+        "Radiation Physics",
+        "Dose Assessment",
+        "Uncertainty & Statistics",
+        "Instrumentation",
+        "Calibration"
+      ],
+      "analytical_methods": {
+        "techniques": [
+          "Analytical Methods (General)",
+          "Gross Screening Methods",
+          "Gamma Spectroscopy",
+          "Mass Spectrometry",
+          "Chemical Separations",
+          "Rapid Laboratory Methods",
+          "Confirmatory Laboratory Methods",
+          "Alpha Spectroscopy",
+          "Beta Counting Methods"
+        ],
+        "by_sample_matrix": [
+          "Urine Analytical Methods",
+          "Blood Analytical Methods",
+          "Water Analytical Methods",
+          "Soil Analytical Methods",
+          "Food Analytical Methods",
+          "Air Filter Analytical Methods",
+          "Wipe Sample Analytical Methods"
+        ],
+        "by_regulatory_domain": [
+          "Clinical Analytical Methods",
+          "Environmental Analytical Methods",
+          "Food Analytical Methods",
+          "Forensic Analytical Methods",
+          "Radiation Protection Analytical Methods",
+          "Nuclear Security Analytical Methods"
+        ]
+      },
+      "operational_domains": [
+        "Sample Collection & Handling",
+        "Contamination Control",
+        "Quality Systems",
+        "Clinical Interpretation & Decision-Making"
+      ],
+      "emergency_response_and_operations": [
+        "Incident Management & ICS Integration",
+        "CRC Operations & Workflows",
+        "Laboratory Surge Operations",
+        "Field Operations & Screening",
+        "Incident Temporal Phases"
+      ],
+      "modeling_and_optimization": [
+        "Throughput Modeling & Optimization"
+      ],
+      "organizational_and_workforce_domains": [
+        "Network Governance Concepts",
+        "Training & Workforce Development"
+      ]
+    },
+    "competency_categories": [
+      "Technical",
+      "Operational",
+      "Planning",
+      "Administrative",
+      "Safety",
+      "Interpretation",
+      "Validation"
+    ],
+    "scenario_types": [
+      "CRC",
+      "Fallout",
+      "Ingestion",
+      "MixedAgentILCE",
+      "FieldScreening",
+      "LabSurge",
+      "SupplyChainDisruption",
+      "CrossNetworkActivation",
+      "Other"
+    ],
+    "resource_types": [
+      "SOP",
+      "Method",
+      "Guide",
+      "TrainingModule",
+      "Tool",
+      "Calculator",
+      "Template",
+      "Standard",
+      "Policy",
+      "Checklist",
+      "Report",
+      "Other"
+    ],
+    "instrument_types": [
+      "HPGe",
+      "LSC",
+      "ICP-MS",
+      "ProportionalCounter",
+      "GammaCamera",
+      "FieldDetector",
+      "PortableSpec",
+      "Other"
+    ]
+  }
+}

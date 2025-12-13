@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     anthropic_api_key: str | None = None
     embedding_model_name: str = "text-embedding-3-large"
 
+    # Ontology
+    ontology_path: str = "data/ontology/ontology.json"
+
     # Chunking
     chunk_size: int = 800
     chunk_overlap: int = 200

@@ -10,13 +10,14 @@ from radiolab_atlas.validators.ontology_validator import OntologyValidator
 from radiolab_atlas.writers.neo4j_writer import Neo4jWriter
 from radiolab_atlas.writers.postgres_writer import PostgresWriter
 from radiolab_atlas.writers.vector_writer import VectorWriter
+from radiolab_atlas.utils.ontology_loader import load_ontology
+
 
 
 def main():
     settings = Settings()
 
-    # TODO: load ontology.json properly
-    ontology = {}
+    ontology = load_ontology(settings.ontology_path)
 
     deps = OrchestratorDependencies(
         document_loader=DocumentLoader(settings),
